@@ -104,4 +104,4 @@ Just avoid macros, but if you really need it...
 If you are naming something that is analogous to an existing C or C++ entity then you can follow the existing naming convention scheme.
 
 ## Formatting
-To help you format code correctly use standart [`.clang-format`](cpp/.clang-format) config.
+To help you format code correctly use standart [`.clang-format`](.clang-format) config.
