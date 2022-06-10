@@ -23,6 +23,39 @@ Include headers in the following order:
 
 Separate each non-empty group with one blank line. It is preferable to follow the alphabetical order in each group.
 
+## Scoping
+
+### Namespaces
+Namespaces subdivide the global scope into distinct, named scopes, and so are useful for preventing name collisions in the global scope. With few exceptions, place code in a namespace. Namespaces should have unique names based on the project name, and possibly its path.
+
+- Terminate multi-line namespaces with comments as shown in the given examples.
+- To place generated protocol message code in a namespace, use the package specifier in the .proto file.
+- Avoid to declare anything in namespace std, including forward declarations of standard library classes.
+- You may not use a using-directive to make all names from a namespace available.
+- Do not use aliases at namespace scope in header files except in explicitly marked internal-only namespaces, because anything imported into a namespace in a header file becomes part of the public API.
+- Do not use inline namespaces in headers.
+
+### Internal linkage
+When definitions do not need to be referenced outside `.c/.cpp` files, give them internal linkage by placing them in an unnamed namespace or declaring them static. It is possible have several inline namespaces in one file.
+
+Prefer placing nonmember functions in a namespace; use completely global functions rarely. Do not use a class simply to group static members. Static methods of a class should generally be closely related to instances of the class or the class's static data.
+
+### Nonmember, static member and global functions
+Prefer placing nonmember functions in a namespace; use completely global functions rarely. Do not use a class simply to group static members. Static methods of a class should generally be closely related to instances of the class or the class's static data.
+
+### Local variables
+Place a function's variables in the narrowest scope possible, and initialize variables in the declaration.
+
+### Static and global Variables
+C++ allows you to declare variables anywhere in a function. We encourage you to declare them in as local a scope as possible, and as close to the first use as possible. This makes it easier for the reader to find the declaration and see what type the variable is and what it was initialized to.
+
+Be careful with initialization, because of order is undefined!
+
+### Thread local
+Thread local variables that aren't declared inside a function must be initialized with a true compile-time constant. Prefer thread_local over other ways of defining thread-local data.
+
+Such a variable is actually a collection of objects, so that when different threads access it, they are actually accessing different objects. Thread local variable instances are initialized much like static variables, except that they must be initialized separately for each thread, rather than once at program startup. These variable instances are not destroyed before their thread terminates, so they do not have the destruction-order issues of static variables.
+
 ## Naming
 Optimize for readability using names that would be clear even to people on a different project.
 
