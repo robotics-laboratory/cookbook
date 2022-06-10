@@ -3,6 +3,26 @@
 ## Versions
 Currently, code should target C++17, i.e., should not use C++2x features. For pure C you may use C11.
 
+## Headers
+Header files should be self-contained (compile on their own) and end in `.h`. Users and refactoring tools should not have to adhere to special conditions to include the header. Specifically, a header should have `#pragma once` and include all other headers it needs. When a header declares inline functions or templates that clients of the header will instantiate, the inline functions and templates must also have definitions in the header, either directly or in files it includes.
+
+If a source or header file refers to a symbol defined elsewhere, the file should directly include a header file which properly intends to provide a declaration or definition of that symbol. It should not include header files for any other reason. Do not rely on transitive inclusions.
+
+### Forward declarations
+A "forward declaration" is a declaration of an entity without an associated definition. Avoid using forward declarations where possible.
+
+### Inline Functions
+Define functions inline only when they are small, say, 10 lines or fewer. It allows the compiler to expand them inline rather than calling them through the usual function call mechanism.
+
+### Names and order of includes
+Include headers in the following order:
+- related header
+- project specific headers 
+- external headers
+- C/C++ standard library headers
+
+Separate each non-empty group with one blank line. It is preferable to follow the alphabetical order in each group.
+
 ## Naming
 Optimize for readability using names that would be clear even to people on a different project.
 
